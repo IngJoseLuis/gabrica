@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retos Navideños</title>
+    <link
+      rel="shortcut icon"
+      href="assets/img/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="Content-left">
+      <img
+        src="assets/img/KV.png"
+        alt="Es una imagen de mascotas navideñas"
+      />
+    </div>
+    <div class="Content-right">
+      <div class="Content-right--form">
+        <div class="Content-right--form-tittle">
+          <a href="">1</a>
+          <p>Inscripción punto de venta</p>
+        </div>
+        <form method="" action="" name="leads">
+          <div class="form-container">
+            <div class="input-container" id="client_name">
+              <input
+                type="text"
+                id="user_name"
+                name="user_name"
+                placeholder="Nombre del cliente"
+              />
+            </div>
+            <div class="input-container" id="nit_input">
+              <input type="text" id="nit" name="nit" placeholder="NIT" />
+            </div>
+            <div class="input-container" id="point_pru">
+              <input
+                type="text"
+                id="point_name"
+                name="point_name"
+                placeholder="Nombre del punto"
+              />
+            </div>
+            <div class="input-container" id="team">
+              <input
+                type="text"
+                id="team_name"
+                name="team_name"
+                placeholder="Nombre del equipo"
+              />
+            </div>
+
+            <select name="city_name" class="input-container-select" id="city_name">
+              <option value="value1" selected>Ciudad</option>
+              <option value="Bogota">Bogotá</option>
+              <option value="Cali">Cali</option>
+              <option value="Medellin">Medellin</option>
+            </select>
+
+            <div class="input-container" id="promoter">
+              <input
+                type="text"
+                id="promotor"
+                name="promotor"
+                placeholder="Promotor"
+              />
+            </div>
+            <div class="input-container" id="rtc_number">
+              <input
+                type="text"
+                id="rtc"
+                name="rtc"
+                placeholder="RTC (Solo números)"
+              />
+            </div>
+            <div class="input-container" id="captain_name">
+              <input
+                type="text"
+                id="captain"
+                name="captain"
+                placeholder="Capitán y/o usuario (Solo minúsculas)"
+              />
+            </div>
+          </div>
+          <div id="check_lab">
+            <label>
+              <input type="checkbox" id="cbox1" name="cbox" /> He leído y acepto las
+              políticas de tratamiento de Datos Personales. Conoce los términos
+              y condiciones
+            </label>
+          </div>
+          <div class="input-container" id="ip_div">
+            <input type="hidden" id="ip" name="ip" />
+          </div>
+          <div class="input-container" id="hourDiv">
+            <input type="hidden" id="hour" name="hour" />
+          </div>
+          <div class="input-container" id="dateDiv">
+            <input type="hidden" id="date" name="date" />
+          </div>
+          <div class="input-container button-container">
+<!--             <input
+              type="submit"
+              id="send-button"
+              class="Content-right--form-next"
+              value="Siguiente"
+            /> -->
+            <button id="send-button"
+            class="Content-right--form-next">
+            Siguiente
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="assets/js/validation.js"></script>
+    <script>
+      const ipInput = document.getElementById("ip");
+      const hourInput = document.getElementById("hour");
+      const dateInput = document.getElementById("date");
+
+      async function getIpClient() {
+        try {
+          const response = await axios.get("https://api.ipify.org?format=json");
+          ipInput.value = response.data.ip;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      const date = new Date();
+
+      let completeDate = `${date.getFullYear()}-${String(
+        date.getMonth() + 1
+      ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      let completeTime = `${String(date.getHours()).padStart(2, "0")}:${String(
+        date.getMinutes()
+      ).padStart(2, "0")}:${String(date.getSeconds()).padStart(2, "0")}`;
+
+      hourInput.value = completeTime;
+      dateInput.value = completeDate;
+      getIpClient();
+    </script>
+  </body>
+</html>
